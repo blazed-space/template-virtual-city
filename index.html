@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blazed City | The Premier Virtual Metropolis</title>
+    <style>
+        :root {
+            --bg-color: #0a0b10;
+            --card-bg: #131622;
+            --accent-color: #ff3e6c;
+            --accent-glow: rgba(255, 62, 108, 0.4);
+            --text-main: #f1f1f7;
+            --text-muted: #8a8f9f;
+            --border-color: #222638;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(10, 11, 16, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-color);
+        }
+
+        .btn-connect {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--text-main);
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-connect:hover {
+            background: var(--accent-color);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 8% 80px 8%;
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(255, 62, 108, 0.15) 0%, transparent 60%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+
+        /* Dashboard Grid Layout */
+        .container {
+            padding: 0 8% 80px 8%;
+        }
+
+        .grid-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .grid-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Card Styling */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Governance Specifics */
+        .gov-proposal {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .gov-proposal h4 {
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .gov-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        .vote-bar {
+            background: #222;
+            height: 6px;
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .vote-progress {
+            background: var(--accent-color);
+            height: 100%;
+            width: 72%; /* Example progress */
+        }
+
+        /* Market Specifics */
+        .market-ticker {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .market-ticker:last-child {
+            border-bottom: none;
+        }
+
+        .asset-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .asset-name {
+            font-weight: 600;
+        }
+
+        .asset-symbol {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .price-up {
+            color: #00ff88;
+        }
+
+        .price-down {
+            color: #ff3e3e;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">BLAZED<span>.CITY</span></div>
+        <nav>
+            <a href="#" class="active">Metropolis</a>
+            <a href="#">Governance</a>
+            <a href="#">Markets</a>
+            <a href="#">Data Feed</a>
+        </nav>
+        <button class="btn-connect">Enter City</button>
+    </header>
+
+    <section class="hero">
+        <h1>Welcome to Blazed City</h1>
+        <p>A decentralized virtual ecosystem governed by its citizens. Trade digital assets, vote on municipal policies, and shape the future of the meta-metropolis.</p>
+    </section>
+
+    <main class="container">
+        <div class="grid-section">
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        🏛️ Virtual Governance
+                    </div>
+                    <span class="badge">City Hall Active</span>
+                </div>
+                
+                <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem;">
+                    Participate in municipal consensus. Review, submit, and vote on architectural frameworks, zoning laws, and treasury allocations.
+                </p>
+
+                <div class="gov-proposal">
+                    <h4>#BCP-104: Expand Cyber-District Commercial Zoning</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Proposal to increase high-density virtual estate allocations in Sector 7.</p>
+                    <div class="vote-bar"><div class="vote-progress" style="width: 84%;"></div></div>
+                    <div class="gov-meta">
+                        <span>Status: <strong>Voting Open</strong></span>
+                        <span>84% Yes</span>
+                    </div>
+                </div>
+
+                <div class="gov-proposal">
+                    <h4>#BCP-103: Dynamic Tax Adjustments for Virtual Land Sales</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Lower transactional gas fees for registered city residents.</p>
+                    <div class="vote-bar"><div class="vote-progress" style="width: 41%;"></div></div>
+                    <div class="gov-meta">
+                        <span>Status: <strong>Voting Open</strong></span>
+                        <span>41% Yes</span>
+                    </div>
+                </div>
+
+                <button class="btn-connect" style="width: 100%; margin-top: 15px;">Go to Civic Dashboard</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        📈 Virtual Markets
+                    </div>
+                    <span class="badge">Live Feed</span>
+                </div>
+
+                <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem;">
+                    Real-time market activity for Blazed City real estate, municipal bonds, digital assets, and unique citizen commodities.
+                </p>
+
+                <div class="market-ticker">
+                    <div class="asset-info">
+                        <span class="asset-name">Blazed City Token</span>
+                        <span class="asset-symbol">$BLZD</span>
+                    </div>
+                    <div style="text-align: right;">
+                        <div>$2.44</div>
+                        <span class="price-up" style="font-size: 0.85rem;">+12.4%</span>
+                    </div>
+                </div>
+
+                <div class="market-ticker">
+                    <div class="asset-info">
+                        <span class="asset-name">Sector 3 Core Plaza (Land)</span>
+                        <span class="asset-symbol">PARCEL #4402</span>
+                    </div>
+                    <div style="text-align: right;">
+                        <div>14.80 ETH</div>
+                        <span class="price-up" style="font-size: 0.85rem;">+3.1%</span>
+                    </div>
+                </div>
+
+                <div class="market-ticker">
+                    <div class="asset-info">
+                        <span class="asset-name">Municipal Utility Bond (Series A)</span>
+                        <span class="asset-symbol">BC-BOND-A</span>
+                    </div>
+                    <div style="text-align: right;">
+                        <div>$105.20</div>
+                        <span class="price-down" style="font-size: 0.85rem;">-0.8%</span>
+                    </div>
+                </div>
+
+                <button class="btn-connect" style="width: 100%; margin-top: 33px;">Access Marketplace</button>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 Blazed City Ecosystem. All Rights Reserved. Built for the virtual frontier.
+    </footer>
+
+</body>
